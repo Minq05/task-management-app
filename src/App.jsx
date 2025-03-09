@@ -15,7 +15,9 @@ function App() {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/tasks");
+      const res = await axios.get(
+        "https://task-management-app-ecci.onrender.com/tasks"
+      );
       setTasks(res.data);
     } catch (err) {
       alert("❌ Lỗi khi tải danh sách task!");
@@ -29,7 +31,10 @@ function App() {
 
   const handleAdd = async (task) => {
     try {
-      await axios.post("http://localhost:3001/tasks", task);
+      await axios.post(
+        "https://task-management-app-ecci.onrender.com/tasks",
+        task
+      );
       alert("✅ Đã thêm task mới!");
       fetchTasks();
     } catch (err) {
@@ -41,7 +46,9 @@ function App() {
   const handleDelete = async (id) => {
     if (!window.confirm("Bạn có chắc chắn muốn xóa task này?")) return;
     try {
-      await axios.delete(`http://localhost:3001/tasks/${id}`);
+      await axios.delete(
+        `https://task-management-app-ecci.onrender.com/tasks/${id}`
+      );
       alert("🗑️ Đã xóa task!");
       fetchTasks();
     } catch (err) {
@@ -53,10 +60,13 @@ function App() {
   const handleStatusChange = async (id, newStatus) => {
     try {
       const task = tasks.find((t) => t.id === id);
-      await axios.put(`http://localhost:3001/tasks/${id}`, {
-        ...task,
-        status: newStatus,
-      });
+      await axios.put(
+        `https://task-management-app-ecci.onrender.com/tasks/${id}`,
+        {
+          ...task,
+          status: newStatus,
+        }
+      );
       alert("🔄 Cập nhật trạng thái thành công!");
       fetchTasks();
     } catch (err) {
