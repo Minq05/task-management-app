@@ -45,5 +45,12 @@
       "status": "done",
       "id": 9
     }
+  ],
+  "auth": [
+    {
+      "id": "1",
+      "username": "minq05",
+      "password": "22022005"
+    }
   ]
 }
