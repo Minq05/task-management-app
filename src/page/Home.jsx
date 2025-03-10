@@ -35,7 +35,7 @@ function Home() {
 
   const handleAdd = async (task) => {
     if (!user || user.username !== "minq05") {
-      alert("Bạn không có quyền Thêm dự án! Hãy đăng nhập !");
+      alert("Bạn không có quyền Thêm task! Hãy đăng nhập !");
       nav("/login");
       return;
     } else {
@@ -55,7 +55,7 @@ function Home() {
 
   const handleDelete = async (id) => {
     if (!user || user.username !== "minq05") {
-      alert("Bạn không có quyền Thêm dự án! Hãy đăng nhập !");
+      alert("Bạn không có quyền Xóa task! Hãy đăng nhập !");
       nav("/login");
       return;
     } else {
@@ -75,7 +75,7 @@ function Home() {
 
   const handleStatusChange = async (id, newStatus) => {
     if (!user || user.username !== "minq05") {
-      alert("Bạn không có quyền Thêm dự án! Hãy đăng nhập !");
+      alert("Bạn không có quyền Sửa trạng thái! Hãy đăng nhập !");
       nav("/login");
       return;
     } else {
