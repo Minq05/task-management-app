@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import useAuth from "../context/AuthContext";
@@ -43,10 +43,10 @@ function Login() {
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button class="btn" type="submit">
+            <button class="btn text-black" type="submit">
               Login
             </button>
-            <a href="/" className="view">
+            <a href="/" className="view text-black">
               Chỉ xem
             </a>
           </form>
