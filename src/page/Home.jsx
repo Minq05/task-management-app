@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TaskForm from "../components/TaskForm";
 import TaskCard from "../components/TaskCard";
+import useAuth from "../context/AuthContext";
+import { useNavigate } from "react-router";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
@@ -12,6 +14,8 @@ function Home() {
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
   const tasksPerPage = 5;
+  const { user } = useAuth();
+  const nav = useNavigate();
 
   const fetchTasks = async () => {
     try {
@@ -30,48 +34,66 @@ function Home() {
   }, []);
 
   const handleAdd = async (task) => {
-    try {
-      await axios.post(
-        "https://task-management-app-ecci.onrender.com/tasks",
-        task
-      );
-      alert("✅ Đã thêm task mới!");
-      fetchTasks();
-    } catch (err) {
-      alert("❌ Lỗi khi thêm task!");
-      console.error(err);
+    if (!user || user.username !== "minq05") {
+      alert("Bạn không có quyền Thêm dự án! Hãy đăng nhập !");
+      nav("/login");
+      return;
+    } else {
+      try {
+        await axios.post(
+          "https://task-management-app-ecci.onrender.com/tasks",
+          task
+        );
+        alert("✅ Đã thêm task mới!");
+        fetchTasks();
+      } catch (err) {
+        alert("❌ Lỗi khi thêm task!");
+        console.error(err);
+      }
     }
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Bạn có chắc chắn muốn xóa task này?")) return;
-    try {
-      await axios.delete(
-        `https://task-management-app-ecci.onrender.com/tasks/${id}`
-      );
-      alert("🗑️ Đã xóa task!");
-      fetchTasks();
-    } catch (err) {
-      alert("❌ Lỗi khi xóa task!");
-      console.error(err);
+    if (!user || user.username !== "minq05") {
+      alert("Bạn không có quyền Thêm dự án! Hãy đăng nhập !");
+      nav("/login");
+      return;
+    } else {
+      if (!window.confirm("Bạn có chắc chắn muốn xóa task này?")) return;
+      try {
+        await axios.delete(
+          `https://task-management-app-ecci.onrender.com/tasks/${id}`
+        );
+        alert("🗑️ Đã xóa task!");
+        fetchTasks();
+      } catch (err) {
+        alert("❌ Lỗi khi xóa task!");
+        console.error(err);
+      }
     }
   };
 
   const handleStatusChange = async (id, newStatus) => {
-    try {
-      const task = tasks.find((t) => t.id === id);
-      await axios.put(
-        `https://task-management-app-ecci.onrender.com/tasks/${id}`,
-        {
-          ...task,
-          status: newStatus,
-        }
-      );
-      alert("🔄 Cập nhật trạng thái thành công!");
-      fetchTasks();
-    } catch (err) {
-      alert("❌ Lỗi khi cập nhật task!");
-      console.error(err);
+    if (!user || user.username !== "minq05") {
+      alert("Bạn không có quyền Thêm dự án! Hãy đăng nhập !");
+      nav("/login");
+      return;
+    } else {
+      try {
+        const task = tasks.find((t) => t.id === id);
+        await axios.put(
+          `https://task-management-app-ecci.onrender.com/tasks/${id}`,
+          {
+            ...task,
+            status: newStatus,
+          }
+        );
+        alert("🔄 Cập nhật trạng thái thành công!");
+        fetchTasks();
+      } catch (err) {
+        alert("❌ Lỗi khi cập nhật task!");
+        console.error(err);
+      }
     }
   };
 

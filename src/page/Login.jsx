@@ -14,10 +14,10 @@ function Login() {
     const success = await login(username, password);
 
     if (success) {
-      alert("Đăng nhập thành công !");
+      alert("✅ Đăng nhập thành công !");
       navigate("/");
     } else {
-      alert("Sai tài khoản hoặc mật khẩu!");
+      alert("❌ Sai tài khoản hoặc mật khẩu!");
     }
   };
   return (

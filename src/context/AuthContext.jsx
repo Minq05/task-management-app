@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       const res = await axios.get(
-        "https://minq05-portfolio.onrender.com/auth",
+        "https://task-management-app-ecci.onrender.com/auth",
         {
           params: { username, password },
         }

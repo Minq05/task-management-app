@@ -2,6 +2,7 @@ import Login from "./page/Login";
 import NotFound from "./page/Notfound";
 import { useRoutes } from "react-router-dom";
 import Home from "./page/Home";
+import "./App.css";
 const routesConfig = [
   {
     path: "/",
